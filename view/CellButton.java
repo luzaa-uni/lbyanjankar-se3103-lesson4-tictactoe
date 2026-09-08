@@ -18,11 +18,11 @@ public class CellButton extends JButton{
     }
 
     private void init() {
-        setFont(new Font("Courier New", Font.BOLD, 84));
+        setFont(new Font("Segoe UI", Font.BOLD, 84));
         setForeground(Color.BLUE);
         setMark(CellMark.U);
         setDefaultBorder();
-        setHighLightBorder();
+        // setHighLightBorder();
     }
 
     public void setMark(CellMark mark) {
