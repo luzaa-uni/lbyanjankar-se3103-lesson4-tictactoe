@@ -12,6 +12,8 @@ import javax.swing.border.TitledBorder;
 
 import controller.App;
 import controller.ButtonActionListener;
+import controller.CellButtonListener;
+import model.CellMark;
 import model.PlayStrategy;
 
 public class AppWindow extends JFrame{
@@ -78,5 +80,49 @@ public class AppWindow extends JFrame{
         exitButton.addActionListener(buttonListener);
         vsHumanButton.addActionListener(buttonListener);
         vsComputerButton.addActionListener(buttonListener);
+        var cellButtonListener = new CellButtonListener();
+        for (var cellButton : cellButtons) {
+            cellButton.addActionListener(cellButtonListener);
+        }
+
+        updateWindow();
+    }
+
+
+    public void updateWindow() {
+        // update cullbutton marks
+        CellMark[] board = App.gameModel.getBoard();
+        for (int i = 0; i < board.length; i++) {
+            cellButtons[i].setMark(board[i]);
+        }
+
+        // update button states and borders based on game state
+        switch (App.gameModel.getState()) {
+            case INIT, OVER -> {
+                for (var b: cellButtons) {
+                    b.setEnabled(false);
+                }
+                newGameButton.setEnabled(true);
+                vsHumanButton.setEnabled(true);
+                vsComputerButton.setEnabled(true);
+                if (App.gameModel.getWinningLine() != null) {
+                    for (int index : App.gameModel.getWinningLine()) {
+                        cellButtons[index].setHighLightBorder();
+                    }
+                }
+            }
+            case PLAYING -> {
+                newGameButton.setEnabled(false);
+                vsHumanButton.setEnabled(false);
+                vsComputerButton.setEnabled(false);
+                // disable cellbuttons that are already marked
+                for (int i = 0; i < board.length; i++) {
+                    cellButtons[i] .setEnabled(board[i] == CellMark.U);
+                    cellButtons[i].setDefaultBorder();
+                }
+            }
+            default -> // should never reach here, but just in case
+                throw new IllegalStateException("Unexpected game state: " + App.gameModel.getState());
+        }
     }
 }

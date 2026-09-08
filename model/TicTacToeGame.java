@@ -69,20 +69,17 @@ public class TicTacToeGame {
         board[cellIndex] = currentPlayer;
         movesCount++;
         setWinner();
-        if (state == GameState.PLAYING) {
-            togglePlayerTurn();
-        }
     }
 
     public void move(int cellIndex) {
 
-        if (cellIndex < 0 || cellIndex >= 9) {
+        if (cellIndex < 0 || cellIndex >= board.length) {
             // should never happen if the UI is correctly implemented, but we check just in case
             throw new IllegalArgumentException("Invalid cell index");
         }
         humanMove(cellIndex); // human move first
         
-        // if vsComputer,  let the computer play after the human move
+        // if vsComputer, let the computer play after the human move
         if (playStrategy == PlayStrategy.HumanVSComputer) {
             if (state == GameState.PLAYING) { // Only computer plays if game is still active
                 computerMove();

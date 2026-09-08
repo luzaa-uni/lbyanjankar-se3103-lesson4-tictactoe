@@ -25,6 +25,7 @@ public class ButtonActionListener implements ActionListener{
         }
 
         System.out.println("Button clicked:" + command);
-        // App.win.updateWindow();
+
+        App.win.updateWindow();
     }
 }

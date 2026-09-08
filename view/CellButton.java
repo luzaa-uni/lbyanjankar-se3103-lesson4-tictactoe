@@ -27,15 +27,9 @@ public class CellButton extends JButton{
 
     public void setMark(CellMark mark) {
         switch (mark) {
-            case X:
-                setText("X");
-                break;
-            case O:
-                setText("O");
-                break;
-            case U:
-                setText("\u22a5"); // up tack symbol
-                break;
+            case X -> setText("X");
+            case O -> setText("O");
+            case U -> setText("\u22a5"); // up tack symbol
         }
     }
 
