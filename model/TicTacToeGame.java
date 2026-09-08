@@ -81,11 +81,15 @@ public class TicTacToeGame {
             throw new IllegalArgumentException("Invalid cell index");
         }
         humanMove(cellIndex); // human move first
+        
         // if vsComputer,  let the computer play after the human move
-
         if (playStrategy == PlayStrategy.HumanVSComputer) {
-            togglePlayerTurn(); // switch to computer's turn
-            computerMove();
+            if (state == GameState.PLAYING) { // Only computer plays if game is still active
+                computerMove();
+                if (state == GameState.PLAYING) { // Toggle back only if game continues
+                    togglePlayerTurn();
+                }
+            }
         }
 
     }
@@ -155,6 +159,6 @@ public class TicTacToeGame {
         this.state = state;
     }
 
-    
+
 
 }
