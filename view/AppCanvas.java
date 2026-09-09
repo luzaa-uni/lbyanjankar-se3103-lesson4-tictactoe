@@ -30,17 +30,17 @@ public class AppCanvas extends JPanel{
         GameState state = game.getState();
 
         switch (state) {
-            case INIT:
+            case INIT -> {
                 g2.setColor(Color.BLUE);
                 g2.drawString("Press <New Game> to start", X_OFFSET, 50);
-                break;
-            case PLAYING:
+            }
+            case PLAYING -> {
                 g2.setColor(Color.BLUE);
                 var str = String.format("Current Player: %s | Move: %d", 
                     game.getCurrentPlayer(), game.getMovesCount());
                 g2.drawString(str, X_OFFSET, 90);
-                break;
-            case OVER:
+            }
+            case OVER -> {
                 g2.setColor(Color.RED);
                 CellMark winner = game.getWinner();
                 String resultStr = winner + " has won";
@@ -49,7 +49,7 @@ public class AppCanvas extends JPanel{
                 }
                 g2.drawString("Game Over: " + resultStr, X_OFFSET, 50);
                 g2.drawString("Press <New Game> to play again", X_OFFSET, 80);
-                
+            }
         }
         
     }
