@@ -124,5 +124,6 @@ public class AppWindow extends JFrame{
             default -> // should never reach here, but just in case
                 throw new IllegalStateException("Unexpected game state: " + App.gameModel.getState());
         }
+        canvas.repaint();
     }
 }

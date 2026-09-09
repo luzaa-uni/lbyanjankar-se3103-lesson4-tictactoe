@@ -81,15 +81,15 @@ public class TicTacToeGame {
         
         // if vsComputer, let the computer play after the human move
         if (playStrategy == PlayStrategy.HumanVSComputer) {
-            if (state == GameState.PLAYING) { // Only computer plays if game is still active
-                computerMove();
-                if (state == GameState.PLAYING) { // Toggle back only if game continues
-                    togglePlayerTurn();
-                }
+            if (state == GameState.OVER) {
+                return;
+            }
+            togglePlayerTurn();
+            computerMove();
             }
         }
 
-    }
+    
 
     private void computerMove() {
         // pick a random empty cell for the computer's move
