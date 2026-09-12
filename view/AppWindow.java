@@ -35,7 +35,7 @@ public class AppWindow extends JFrame{
 
     public void init() {
         setTitle("Tic Tac Toe");
-        setLocation(400, 300);
+        setLocation(400, 100);
         var cp = getContentPane();
         cp.add(canvas, BorderLayout.NORTH);
 
